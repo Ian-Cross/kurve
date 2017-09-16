@@ -1,0 +1,27 @@
+/*****************************************************
+ * Magic Mirror                                      *
+ * Custom CSS                                        *
+ *                                                   *
+ * By Michael Teeuw http://michaelteeuw.nl           *
+ * MIT Licensed.                                     *
+ *                                                   *
+ * Add any custom CSS below.                         *
+ * Changes to this files will be ignored by GIT. *
+ *****************************************************/
+
+ body {
+
+ }
+
+ .background {
+   position: absolute;
+   height: 100%;
+   width: 100%;
+   padding: 60px !important;
+   color: black;
+   background: #bae0ff;
+   background: -moz-linear-gradient(left, #bae0ff 0%, #618c91 100%);
+   background: -webkit-linear-gradient(left, #bae0ff 0%,#618c91 100%);
+   background: linear-gradient(to right, #bae0ff 0%,#618c91 100%);
+   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bae0ff', endColorstr='#618c91',GradientType=1 );
+ }
