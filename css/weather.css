@@ -1,0 +1,14 @@
+.weather_container {
+    text-align: right;
+    font-size: 72px;
+}
+
+#weatherImage {
+    display: inline-block;
+    height: 100px;
+    width: 100px;
+}
+
+ #weatherTemp {
+     display: inline-block;
+ }

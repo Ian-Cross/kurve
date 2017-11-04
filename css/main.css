@@ -1,0 +1,54 @@
+.full_container {
+    width: 100%;
+    background: #a0a0a0;
+    background: -moz-linear-gradient(45deg, #a0a0a0 0%, #727272 100%);
+    background: -webkit-linear-gradient(45deg, #a0a0a0 0%,#727272 100%);
+    background: linear-gradient(45deg, #a0a0a0 0%,#727272 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a0a0a0', endColorstr='#727272',GradientType=1 );
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.container_fluid {
+    padding: 30px 60px;
+    color: #fff;
+    height: 100%;
+}
+
+.status-bar {
+    position: relative;
+}
+
+.app-container {
+    position: relative;
+    margin-top: 15px;
+}
+
+.appBall {
+    width: 75px;
+    height: 75px;
+    background-color: blue;
+    border-radius: 50px 50px 50px;
+    margin-bottom: 15px;
+    border: 1px solid;
+    position: relative;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.clear-space {
+    clear: both;
+}
+
+.hidden {
+    display: none
+}
