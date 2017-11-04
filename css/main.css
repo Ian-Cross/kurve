@@ -6,10 +6,6 @@
     background: linear-gradient(45deg, #a0a0a0 0%,#727272 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a0a0a0', endColorstr='#727272',GradientType=1 );
     position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
 }
 
 .container_fluid {
@@ -37,12 +33,29 @@
     position: relative;
 }
 
+.modal-background {
+    position: absolute;
+    background: rgba(149,165,166,0.7);
+    z-index: 0;
+}
+
 .left {
     float: left;
 }
 
 .right {
     float: right;
+}
+
+.fullscreen {
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.text-center {
+    text-align: center;
 }
 
 .clear-space {

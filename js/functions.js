@@ -1,6 +1,7 @@
 function startScreen() {
     startTime();
     startWeather();
+    loadItems();
 }
 
 function startTime() {
@@ -99,8 +100,25 @@ function checkTime(i) {
 //kelvin 273.15 to Celcius 0
 function startWeather() {
     $.get( "http://api.openweathermap.org/data/2.5/weather?id=5967629&APPID=59456f5d8340d88b1552e92001c04866", function( data ) {
-        console.log(data.main.temp);
+        //console.log(data.main.temp);
         document.getElementById('weatherImage').src = "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png";
         document.getElementById('weatherTemp').innerHTML = Math.round(data.main.temp - 273.15,2) + "&deg;";
     });
 }
+
+function hideAllApps() {
+    hideGroceryChart();
+    updateVidibleModalBackground();
+};
+
+function updateVidibleModalBackground() {
+    $(".modal-background").toggleClass('hidden');
+};
+
+$(document).ready(function() {
+
+    $(".modal-background").click(function() {
+        hideAllApps();
+    });
+
+});

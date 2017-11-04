@@ -1,15 +1,64 @@
 .grocery-chart-app {
-    background: url(../images/icons/grocery-chart.png);
+    background: yellow;
+}
+
+.grocery-chart-icon {
+    background: url(../images/icons/grocery-bag.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    height: 50px;
+    width: 50px;
+    margin: 12px auto;
 }
 
 .grocery-chart-modal-container {
-    background: #34495e;
-    height: 500px;
+    background: #3498db;
     width: 800px;
+    min-height: 300px;
     display: block;
     position: absolute;
     top: 100px;
     left: calc(50% - 400px);
+    z-index: 50;
+}
+
+.bought-item-container {
+    background: #2c3e50;
+    height: 60px;
+    width: 120px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #fff;
+    font-size: 72px;
+    border-radius: 6px 6px 6px;
+    cursor: pointer;
+}
+
+.bought-item-container .triangle {
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 20px solid #2c3e50;
+    position: relative;
+    top: 60px;
+    left: 40px;
+}
+
+.bought-item-container .subtract {
+    float: left;
+    position: relative;
+    top: -30px;
+    left: 10px;
+}
+
+.bought-item-container .add {
+    float: right;
+    position: relative;
+    top: -30px;
+    right: 10px;
 }
 
 .grocery-chart {
@@ -20,4 +69,41 @@
     height: 100%;
     width: 100%;
     border: 1px solid;
+    overflow: hidden;
+}
+
+.grocery-chart > table {
+    width: 100%;
+    border: 1px solid black;
+}
+
+.grocery-chart tr {
+    text-align: center;
+    colspan: 1;
+}
+
+.grocery-chart > table + tr {
+    width: 50%;
+}
+
+.grocery-chart td {
+    text-align: center;
+    border: 1px solid black;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.grocery-chart th {
+    text-align: center;
+    border: 1px solid black;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.tally-mark {
+    font-size: 12px;
+    text-align: right !important;
+    padding-right: 2px !important;
+    padding-top: 28px !important;
+    padding-bottom: 0px !important;
 }
