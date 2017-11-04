@@ -36,27 +36,27 @@
                 <div class="clear-space"></div>
                 <div class="app-container">
                     <div class="appBall left grocery-chart-app"><div class="grocery-chart-icon"></div></div>
-                    <div class="appBall right"></div>
+                    <div class="appBall right"><div class="memo"></div></div>
 
                     <div class="clear-space"></div>
 
-                    <div class="appBall left"></div>
-                    <div class="appBall right"></div>
+                    <div class="appBall left"><div class="bus"></div></div>
+                    <div class="appBall right"><div class="music"></div></div>
 
                     <div class="clear-space"></div>
 
-                    <div class="appBall left"></div>
-                    <div class="appBall right"></div>
+                    <div class="appBall left"><div class="spotify"></div></div>
+                    <div class="appBall right bg-white"><div class="facebook"></div></div>
 
                     <div class="clear-space"></div>
 
-                    <div class="appBall left"></div>
-                    <div class="appBall right"></div>
+                    <div class="appBall left bg-white"><div class="twitter"></div></div>
+                    <div class="appBall right bg-white"><div class="gmail"></div></div>
 
                     <div class="clear-space"></div>
 
-                    <div class="appBall left"></div>
-                    <div class="appBall right"></div>
+                    <div class="appBall left"><div class=""></div></div>
+                    <div class="appBall right"><div class=""></div></div>
 
                     <div class="clear-space"></div>
                 </div>

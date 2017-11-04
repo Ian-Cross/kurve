@@ -1,9 +1,13 @@
 .full_container {
     width: 100%;
-    background: #a0a0a0;
+    background: url("../images/background.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    /*background: #a0a0a0;
     background: -moz-linear-gradient(45deg, #a0a0a0 0%, #727272 100%);
     background: -webkit-linear-gradient(45deg, #a0a0a0 0%,#727272 100%);
-    background: linear-gradient(45deg, #a0a0a0 0%,#727272 100%);
+    background: linear-gradient(45deg, #a0a0a0 0%,#727272 100%);*/
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a0a0a0', endColorstr='#727272',GradientType=1 );
     position: absolute;
 }
@@ -26,11 +30,19 @@
 .appBall {
     width: 75px;
     height: 75px;
-    background-color: blue;
+    background: rgba(255,255,255,0.4);
     border-radius: 50px 50px 50px;
     margin-bottom: 15px;
-    border: 1px solid;
     position: relative;
+    -moz-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+.appBall:hover {
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
 }
 
 .modal-background {
@@ -64,4 +76,53 @@
 
 .hidden {
     display: none
+}
+
+.bg-white {
+    background: #fff;
+}
+
+.facebook, .twitter, .gmail, .spotify {
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    height: 100%;
+    width: 100%;
+}
+
+.memo, .music, .bus {
+    height: 50px;
+    width: 50px;
+    margin: 12px auto;
+    background-repeat: no-repeat !important;
+    background-size: contain !important;
+    background-position: center !important;
+}
+
+.facebook {
+    background: url("../images/icons/facebook.svg");
+}
+
+.twitter {
+    background: url("../images/icons/twitter.svg");
+}
+
+.gmail {
+    background: url("../images/icons/gmail.svg");
+}
+
+.spotify {
+    background: url("../images/icons/spotify.svg");
+}
+
+.music {
+    background: url("../images/icons/music.svg");
+}
+
+.memo {
+    background: url("../images/icons/memo.svg");
+}
+
+.bus {
+    background: url("../images/icons/bus.svg");
 }
