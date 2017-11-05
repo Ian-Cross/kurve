@@ -32,8 +32,11 @@
 }
 
 .app-container {
-    position: relative;
     margin-top: 15px;
+    width: 500px;
+    position: absolute;
+    left: calc(50vw - 250px);
+    bottom: 0;
 }
 
 .appBall {

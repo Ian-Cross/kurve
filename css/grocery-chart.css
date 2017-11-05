@@ -15,11 +15,11 @@
 .grocery-chart-modal-container {
     background: #708090;
     min-height: 300px;
-    width: 80%;
+    width: 60%;
     display: block;
     position: absolute;
     top: 100px;
-    left: calc(50% - 400px);
+    left: 20%;
     z-index: 50;
 }
 

@@ -29,7 +29,7 @@
                         <div id="date"></div>
                     </div>
                     <div class="weather_container col-xs-6">
-                        <div id="weatherImage"><img alt="Weather Icon" onclick="startWeather()"/></div>
+                        <img id="weatherImage" alt="Weather Icon" onclick="startWeather()"/>
                         <div id="weatherTemp"></div>
                     </div>
                 </div>
