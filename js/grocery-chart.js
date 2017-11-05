@@ -16,7 +16,7 @@ function loadItems() {
                "    <div class='triangle'></div>" +
                "</div>" +
                "<div class='grocery-chart'>" +
-               "    <table class='text-center'>" +
+               "    <table class='grocery-table text-center'>" +
                "        <col width='300'>" +
                "        <col width='150'>" +
                "        <col width='150'>" +
@@ -53,7 +53,7 @@ $(document).ready(function(){
         $('.grocery-chart-modal-container').toggleClass('hidden');
     });
 
-    $('.grocery-chart-modal-container td').click(function() {
+    $('.grocery-table tr td').click(function() {
         if ($(this).attr("class") == "item"){
             $(".bought-item-container").addClass('hidden');
         } else {
@@ -68,8 +68,8 @@ $(document).ready(function(){
                 //show the pop up and move to correct location
                 $(".bought-item-container").removeClass('hidden');
                 $(".bought-item-container").css({top: (position.top-80) + "px", left: (position.left) + "px"});
-            }
-        }
+            };
+        };
     });
 
     $(".bought-item-container .add").click(function(){
@@ -88,7 +88,7 @@ $(document).ready(function(){
             default:
                 box.html("X");
                 break;
-        }
+        };
     });
 
     $(".bought-item-container .subtract").click(function(){
@@ -106,6 +106,6 @@ $(document).ready(function(){
             default:
                 box.html(" ");
                 break;
-        }
-    })
+        };
+    });
 });

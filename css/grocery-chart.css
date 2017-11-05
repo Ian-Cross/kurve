@@ -1,5 +1,5 @@
 .grocery-chart-app {
-    
+
 }
 
 .grocery-chart-icon {
@@ -34,6 +34,7 @@
     font-size: 72px;
     border-radius: 6px 6px 6px;
     cursor: pointer;
+    border: 1px solid;
 }
 
 .bought-item-container .triangle {
@@ -70,6 +71,8 @@
     width: 100%;
     border: 1px solid;
     overflow: hidden;
+    position: relative;
+    z-index: 51;
 }
 
 .grocery-chart > table {
