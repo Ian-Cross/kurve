@@ -17,11 +17,6 @@ function loadItems() {
                "</div>" +
                "<div class='grocery-chart'>" +
                "    <table class='grocery-table text-center'>" +
-               "        <col width='300'>" +
-               "        <col width='150'>" +
-               "        <col width='150'>" +
-               "        <col width='150'>" +
-               "        <col width='150'>" +
                "        <tr>" +
                "            <th>Items</th>" +
                "            <th>Ian</th>" +
@@ -67,7 +62,7 @@ $(document).ready(function(){
 
                 //show the pop up and move to correct location
                 $(".bought-item-container").removeClass('hidden');
-                $(".bought-item-container").css({top: (position.top-80) + "px", left: (position.left) + "px"});
+                $(".bought-item-container").css({top: (position.top-80) + "px", left: (position.left - 10) + "px"});
             };
         };
     });

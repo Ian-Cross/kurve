@@ -13,9 +13,9 @@
 }
 
 .grocery-chart-modal-container {
-    background: #3498db;
-    width: 800px;
+    background: #708090;
     min-height: 300px;
+    width: 80%;
     display: block;
     position: absolute;
     top: 100px;
@@ -34,7 +34,7 @@
     font-size: 72px;
     border-radius: 6px 6px 6px;
     cursor: pointer;
-    border: 1px solid;
+    z-index: 52;
 }
 
 .bought-item-container .triangle {
@@ -83,6 +83,18 @@
 .grocery-chart tr {
     text-align: center;
     colspan: 1;
+}
+
+.grocery-chart tr > td:first-child {
+    text-align: left;
+}
+
+.grocery-chart tr > th:first-child, .grocery-chart tr > td:first-child{
+    width: auto;
+}
+
+.grocery-chart tr > th, .grocery-chart tr {
+    width: 100px;
 }
 
 .grocery-chart > table + tr {

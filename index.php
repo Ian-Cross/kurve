@@ -29,36 +29,23 @@
                         <div id="date"></div>
                     </div>
                     <div class="weather_container col-xs-6">
-                        <img id="weatherImage" alt="Weather Icon"/>
+                        <div id="weatherImage"><img alt="Weather Icon" onclick="startWeather()"/></div>
                         <div id="weatherTemp"></div>
                     </div>
                 </div>
                 <div class="clear-space"></div>
                 <div class="app-container">
-                    <div class="appBall left grocery-chart-app"><div class="grocery-chart-icon"></div></div>
-                    <div class="appBall right"><div class="memo"></div></div>
-
+                    <div class="appBall grocery-chart-app"><div class="grocery-chart-icon"></div></div>
+                    <div class="appBall"><div class="memo"></div></div>
+                    <div class="appBall"><div class="bus"></div></div>
+                    <div class="appBall"><div class="music"></div></div>
+                    <div class="appBall"><div class=""></div></div>
                     <div class="clear-space"></div>
-
-                    <div class="appBall left"><div class="bus"></div></div>
-                    <div class="appBall right"><div class="music"></div></div>
-
-                    <div class="clear-space"></div>
-
-                    <div class="appBall left"><div class="spotify"></div></div>
-                    <div class="appBall right bg-white"><div class="facebook"></div></div>
-
-                    <div class="clear-space"></div>
-
-                    <div class="appBall left bg-white"><div class="twitter"></div></div>
-                    <div class="appBall right bg-white"><div class="gmail"></div></div>
-
-                    <div class="clear-space"></div>
-
-                    <div class="appBall left"><div class=""></div></div>
-                    <div class="appBall right"><div class=""></div></div>
-
-                    <div class="clear-space"></div>
+                    <div class="appBall bg-white"><div class="facebook"></div></div>
+                    <div class="appBall bg-white"><div class="twitter"></div></div>
+                    <div class="appBall bg-white"><div class="gmail"></div></div>
+                    <div class="appBall"><div class="spotify"></div></div>
+                    <div class="appBall"><div class=""></div></div>
                 </div>
             </div>
         </div>
