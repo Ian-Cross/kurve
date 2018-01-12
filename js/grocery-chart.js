@@ -1,18 +1,36 @@
+var box = null;
+
 function loadItems() {
-    var items = [
-        "Milk",
-        "Eggs",
-        "Butter",
-        "Mayonaise",
-        "Water Softener Salt",
-        "Paper Towels",
-        "Toilet Paper",
-        "Dish Soap"];
-    var num_items = 8;
+
+    var items = [];
+
+    jQuery.ajax({
+        type: "POST",
+        url: 'database.php',
+        dataType: 'json',
+        async: false,
+        data: {functionname: 'getItems', arguments: ['127.0.0.1', 'kurve']},
+
+        success: function (obj, textstatus) {
+                      if ( !('error' in obj) ) {
+                          //console.log(obj);
+                          for (var key in obj) {
+                              if (obj[key].item) {
+                                  items.push(obj[key]);
+                              }
+                          }
+                      } else {
+                          console.log("Bad: " + obj);
+                      }
+                }
+    });
+    var num_items = items.length;
+
+    console.log(items);
 
     var data = "<div class='bought-item-container hidden'>" +
-               "    <div class='subtract'>-</div>" +
-               "    <div class='add'>+</div>" +
+               "    <div onclick='subGroceryCounter()' class='subtract'>-</div>" +
+               "    <div onclick='addGroceryCounter()' class='add'>+</div>" +
                "    <div class='triangle'></div>" +
                "</div>" +
                "<div class='grocery-chart'>" +
@@ -27,7 +45,7 @@ function loadItems() {
 
 
     for (i = 0; i < num_items; i++) {
-        data = data + "<tr><td class='item'>" + items[i] + "</td><td></td><td></td><td></td><td></td></tr>"
+        data = data + "<tr><td class='item'>" + items[i].item + "</td><td onclick='openGroceryCounter(this)'>" + items[i].Ian + "</td><td onclick='openGroceryCounter(this)'>" + items[i].Mark + "</td><td onclick='openGroceryCounter(this)'>" + items[i].Liam + "</td><td onclick='openGroceryCounter(this)'>" + items[i].Dean + "</td></tr>"
     }
     data = data + "</table></div>";
 
@@ -39,68 +57,61 @@ function hideGroceryChart() {
     $('.bought-item-container').addClass('hidden');
 };
 
+function openGroceryCounter(operator) {
+    var opPos = findPos(operator);
+    var boxPos = findPos(box);
+    if (box != null && opPos[0] == boxPos[0] && opPos[1] == boxPos[1]) {
+        $(".bought-item-container").toggleClass('hidden');
+    } else {
+        box = operator;
+        //show the pop up and move to correct location
+        $(".bought-item-container").removeClass('hidden');
+        var pos = $(".grocery-chart-modal-container").position();
+        $(".bought-item-container").css({top: (opPos[0] - pos.top - 80) + "px", left: (opPos[1] - pos.left - 10) + "px"});
+    };
+}
+
+function addGroceryCounter() {
+    //need to make smarter
+    switch (box.innerHTML) {
+        case "X":
+            box.innerHTML = "I"
+            box.classList.add("tally-mark");
+            break;
+        case "I":
+            box.innerHTML = "II"
+            break;
+        case "II":
+            box.innerHTML = "III"
+            break;
+        default:
+            box.classList.remove("tally-mark");
+            box.innerHTML = "X"
+            break;
+    };
+}
+
+function subGroceryCounter() {
+    switch (box.innerHTML) {
+        case "III":
+            box.innerHTML = "II"
+            break;
+        case "II":
+            box.innerHTML = "I"
+            break;
+        case "I":
+            box.innerHTML = "X"
+            box.classList.remove("tally-mark");
+            break;
+        default:
+            box.innerHTML = " "
+            break;
+    };
+}
+
 $(document).ready(function(){
-
-    var box = null;
-
     $('.grocery-chart-app').click(function(){
-        updateVidibleModalBackground();
+        updateVisibleModalBackground();
         $('.grocery-chart-modal-container').toggleClass('hidden');
-    });
-
-    $('.grocery-table tr td').click(function() {
-        if ($(this).attr("class") == "item"){
-            $(".bought-item-container").addClass('hidden');
-        } else {
-            var position = $(this).position();
-
-            //In the case of click on a box with the pop up already open
-            if (box != null && position.top == box.position().top && position.left == box.position().left) {
-                $(".bought-item-container").toggleClass('hidden');
-            } else {
-                box = $(this);
-
-                //show the pop up and move to correct location
-                $(".bought-item-container").removeClass('hidden');
-                $(".bought-item-container").css({top: (position.top-80) + "px", left: (position.left - 10) + "px"});
-            };
-        };
-    });
-
-    $(".bought-item-container .add").click(function(){
-        //need to make smarter
-        switch (box.html()) {
-            case "X":
-                box.html("I");
-                box.addClass("tally-mark");
-                break;
-            case "I":
-                box.html("II");
-                break;
-            case "II":
-                box.html("III");
-                break;
-            default:
-                box.html("X");
-                break;
-        };
-    });
-
-    $(".bought-item-container .subtract").click(function(){
-        switch (box.html()) {
-            case "III":
-                box.html("II");
-                break;
-            case "II":
-                box.html("I");
-                break;
-            case "I":
-                box.html("X");
-                box.removeClass("tally-mark");
-                break;
-            default:
-                box.html(" ");
-                break;
-        };
     });
 });

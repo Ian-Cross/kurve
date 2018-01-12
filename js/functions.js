@@ -108,12 +108,25 @@ function startWeather() {
 
 function hideAllApps() {
     hideGroceryChart();
-    updateVidibleModalBackground();
+    updateVisibleModalBackground();
 };
 
-function updateVidibleModalBackground() {
+function updateVisibleModalBackground() {
     $(".modal-background").toggleClass('hidden');
 };
+
+function findPos(obj) {
+    var left = 0;
+    var top = 0;
+
+    if (obj && obj.offsetParent){
+        do {
+            left += obj.offsetLeft;
+			top += obj.offsetTop;
+        } while (obj = obj.offsetParent);
+    }
+    return [top,left]
+}
 
 $(document).ready(function() {
 
