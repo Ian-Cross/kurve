@@ -4,25 +4,27 @@ function loadItems() {
 
     var items = [];
 
+    alert(JSON.stringify({functionname: 'getItems', arguments: ['something','nothing']}));
+
     jQuery.ajax({
         type: "POST",
         url: 'database.php',
         dataType: 'json',
         async: false,
-        data: {functionname: 'getItems', arguments: ['127.0.0.1', 'kurve']},
+        data: JSON.stringify({functionname: 'getItems', arguments: ["something","nothing"] }),
 
         success: function (obj, textstatus) {
-                      if ( !('error' in obj) ) {
-                          //console.log(obj);
-                          for (var key in obj) {
-                              if (obj[key].item) {
-                                  items.push(obj[key]);
-                              }
-                          }
-                      } else {
-                          console.log("Bad: " + obj);
-                      }
-                }
+            if ( !('error' in obj) ) {
+                console.log(obj);
+                /*for (var key in obj) {
+                    if (obj[key].item) {
+                        items.push(obj[key]);
+                    }
+                }*/
+            } else {
+                console.log("Bad: " + obj);
+            }
+        }
     });
     var num_items = items.length;
 
@@ -45,7 +47,21 @@ function loadItems() {
 
 
     for (i = 0; i < num_items; i++) {
-        data = data + "<tr><td class='item'>" + items[i].item + "</td><td onclick='openGroceryCounter(this)'>" + items[i].Ian + "</td><td onclick='openGroceryCounter(this)'>" + items[i].Mark + "</td><td onclick='openGroceryCounter(this)'>" + items[i].Liam + "</td><td onclick='openGroceryCounter(this)'>" + items[i].Dean + "</td></tr>"
+        var ianTally = "";
+        var markTally = "";
+        var liamTally = "";
+        var deanTally = "";
+
+         if (items[i].Ian.includes("I"))  ianTally = "tally-mark";
+        if (items[i].Mark.includes("I")) markTally = "tally-mark";
+        if (items[i].Liam.includes("I")) liamTally = "tally-mark";
+        if (items[i].Dean.includes("I")) deanTally = "tally-mark";
+
+        data = data + "<tr><td class='item'>" + items[i].item + "</td>" +
+        "<td id='" + + "' class='" + ianTally + "' onclick='openGroceryCounter(this)'>" + items[i].Ian + "</td>" +
+        "<td class='" + markTally + "' onclick='openGroceryCounter(this)'>" + items[i].Mark + "</td>" +
+        "<td class='" + liamTally + "' onclick='openGroceryCounter(this)'>" + items[i].Liam + "</td>" +
+        "<td class='" + deanTally + "' onclick='openGroceryCounter(this)'>" + items[i].Dean + "</td></tr>";
     }
     data = data + "</table></div>";
 
@@ -74,7 +90,7 @@ function openGroceryCounter(operator) {
 function addGroceryCounter() {
     //need to make smarter
     switch (box.innerHTML) {
-        case "X":
+        case "x":
             box.innerHTML = "I"
             box.classList.add("tally-mark");
             break;
@@ -86,9 +102,10 @@ function addGroceryCounter() {
             break;
         default:
             box.classList.remove("tally-mark");
-            box.innerHTML = "X"
+            box.innerHTML = "x"
             break;
     };
+    updateDatabase();
 }
 
 function subGroceryCounter() {
@@ -100,13 +117,18 @@ function subGroceryCounter() {
             box.innerHTML = "I"
             break;
         case "I":
-            box.innerHTML = "X"
+            box.innerHTML = "x"
             box.classList.remove("tally-mark");
             break;
         default:
             box.innerHTML = " "
             break;
     };
+    updateDatabase()
+}
+
+function updateDatabase() {
+    alert(box.cellIndex);
 }
 
 $(document).ready(function(){
