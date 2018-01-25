@@ -16,40 +16,71 @@ function getItems($con) {
     return $message;
 }
 
-function userLookup() {
+function listItems($con) {
+    $itemList = $con->query("SELECT Name FROM Store");
+    return $itemList;
+}
 
+function listUsers($con) {
+    $userList = $con->query("SELECT Name FROM Users");
+    return $userList;
+}
+
+function updateValue($con,$id,$user,$item,$value) {
+    //echo (":$id: :$user: :$item: :$value:");
+    if ($id == " " || $id == "") {
+        $update = $con->query("INSERT INTO ItemsUsers (user,item,value) VALUES ($user,$item,$value)");
+        $queryType = "Insert";
+    } else if ($value == " " || $value == "") {
+        $update = $con->query("DELETE FROM ItemsUsers WHERE id=$id");
+        $queryType = "Delete";
+    } else {
+        $update = $con->query("UPDATE ItemsUsers SET Value=$value WHERE id=$id");
+        $queryType = "Update";
+    }
+
+    if ($update == null) $success = "false";
+    else $success = "true";
+
+    $results = array();
+    $results['queryType'] = $queryType;
+    $results['querySuccess'] = $success;
+    $results['newId'] = $con->insert_id;
+    $results['user'] = $user;
+    $results['item'] = $item;
+    return $results;
 }
 
 $aResult = array();
 
 if( !isset($_GET['functionname']) ) { $aResult['error'] = 'No function name!'; }
 
-if( !isset($_GET['arguments']) ) { $aResult['error'] = 'No function arguments!'; }
-
 if( !isset($aResult['error']) ) {
 
     switch($_GET['functionname']) {
         case 'getItems':
-            if ( !is_array($_GET['arguments']) ) {
-                $aResult['error'] = 'Error in arguments!';
-            } else {
-                $aResult['result'] = getItems($con);
-                while($row = $aResult['result']->fetch_assoc()) {
-                    array_push($aResult, $row);
-                }
+            $aResult['result'] = getItems($con);
+            while($row = $aResult['result']->fetch_assoc()) {
+                array_push($aResult, $row);
             }
             break;
 
-        case 'userLookup':
-
-            if ( !is_array($_POST['arguments']) || (count($_POST['arguments']) < 3) ) {
-                $aResult['error'] = 'Error in arguments!';
-            } else {
-                //$aResult['result'] = userLookup($_POST['arguments'][0], $_POST['arguments'][1],$_POST['arguments'][2]);
-                while($row = $aResult['result']->fetch_assoc()) {
-                    array_push($aResult, $row);
-                }
+        case 'listItems':
+            $aResult['result'] = listItems($con);
+            while($row = $aResult['result']->fetch_assoc()) {
+                array_push($aResult, $row);
             }
+            break;
+
+        case 'listUsers':
+            $aResult['result'] = listUsers($con);
+            while($row = $aResult['result']->fetch_assoc()) {
+                array_push($aResult, $row);
+            }
+            break;
+
+        case 'updateValue':
+            $aResult['result'] = updateValue($con,$_GET['0'],$_GET['1'],$_GET['2'],$_GET['3']);
             break;
 
         default:

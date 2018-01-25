@@ -1,34 +1,61 @@
 var box = null;
 
-function loadItems() {
+function tableLookup(functionname, args) {
 
-    var items = [];
+    var promiseObj = new RSVP.Promise(function (resolve, reject) {
+        params = "";
 
-    alert(JSON.stringify({functionname: 'getItems', arguments: ['something','nothing']}));
-
-    jQuery.ajax({
-        type: "POST",
-        url: 'database.php',
-        dataType: 'json',
-        async: false,
-        data: JSON.stringify({functionname: 'getItems', arguments: ["something","nothing"] }),
-
-        success: function (obj, textstatus) {
-            if ( !('error' in obj) ) {
-                console.log(obj);
-                /*for (var key in obj) {
-                    if (obj[key].item) {
-                        items.push(obj[key]);
-                    }
-                }*/
-            } else {
-                console.log("Bad: " + obj);
+        if (args != null) {
+            for (x in args) {
+                params += ("&" + x + "=" + args[x]);
             }
         }
-    });
-    var num_items = items.length;
 
-    console.log(items);
+        jQuery.ajax({
+            type: "POST",
+            url: 'database.php?functionname=' + functionname + params,
+            traditional: true,
+            dataType: "json",
+
+            success: function (obj, textstatus) {
+                if ( !('error' in obj) ) {
+                    resolve(obj);
+                } else {
+                    reject(obj);
+                }
+            }
+        });
+    });
+    return promiseObj;
+}
+
+function loadItems() {
+
+    console.log("start of Load Items");
+
+    var itemList = tableLookup("listItems",null);
+
+    itemList.then( function (itemListObj) {
+        var userList = tableLookup("listUsers",null);
+
+        userList.then( function (userListObject) {
+            buildTable(itemListObj,userListObject);
+        }).catch (function(userListError){
+            console.log("userList Error")
+        })
+    }).catch ( function (itemListError) {
+        console.log("itemList Error");
+    })
+
+    console.log("end of Load Items");
+}
+
+function buildTable(itemsListObj, usersListObj) {
+
+    console.log("Building Table");
+
+    numItems = Object.keys(itemsListObj).length - 1;
+    numUsers = Object.keys(usersListObj).length - 1;
 
     var data = "<div class='bought-item-container hidden'>" +
                "    <div onclick='subGroceryCounter()' class='subtract'>-</div>" +
@@ -38,34 +65,79 @@ function loadItems() {
                "<div class='grocery-chart'>" +
                "    <table class='grocery-table text-center'>" +
                "        <tr>" +
-               "            <th>Items</th>" +
-               "            <th>Ian</th>" +
-               "            <th>Mark</th>" +
-               "            <th>Liam</th>" +
-               "            <th>Dean</th>" +
-               "        </tr>";
+               "            <th>Items</th>";
 
-
-    for (i = 0; i < num_items; i++) {
-        var ianTally = "";
-        var markTally = "";
-        var liamTally = "";
-        var deanTally = "";
-
-         if (items[i].Ian.includes("I"))  ianTally = "tally-mark";
-        if (items[i].Mark.includes("I")) markTally = "tally-mark";
-        if (items[i].Liam.includes("I")) liamTally = "tally-mark";
-        if (items[i].Dean.includes("I")) deanTally = "tally-mark";
-
-        data = data + "<tr><td class='item'>" + items[i].item + "</td>" +
-        "<td id='" + + "' class='" + ianTally + "' onclick='openGroceryCounter(this)'>" + items[i].Ian + "</td>" +
-        "<td class='" + markTally + "' onclick='openGroceryCounter(this)'>" + items[i].Mark + "</td>" +
-        "<td class='" + liamTally + "' onclick='openGroceryCounter(this)'>" + items[i].Liam + "</td>" +
-        "<td class='" + deanTally + "' onclick='openGroceryCounter(this)'>" + items[i].Dean + "</td></tr>";
+    for (user = 0; user < numUsers; user++) {
+       userName = usersListObj[user].Name;
+       data += ("<th>" + userName + "</th>");
     }
-    data = data + "</table></div>";
+    data += "</tr>";
 
-    $(".grocery-chart-modal-container").html(data);
+    var itemUser = tableLookup("getItems",null);
+
+    itemUser.then(function (itemUserObj){
+
+        var chart = new Array(numItems);
+
+        for (i = 0; i < numItems; i++) {
+            chart[i] = new Array(numUsers*5);
+            chart[i].fill(" ");
+            for (j = 0; j < numUsers*5; j+=5) {
+                chart[i][j] = i+1;
+                chart[i][j+1] = j/5+1;
+            }
+        }
+
+        console.log(chart);
+
+        for (itemUser in itemUserObj) {
+            if (!itemUserObj[itemUser].User) break;
+            userId = Number(itemUserObj[itemUser].User);
+            itemId = Number(itemUserObj[itemUser].Item);
+            itemUserId = Number(itemUserObj[itemUser].id);
+            valueNum = Number(itemUserObj[itemUser].Value);
+            valueStr = " ";
+
+            switch (valueNum) {
+                case -1:
+                    valueStr = "X";
+                    break;
+                case 1:
+                    valueStr = "I";
+                    break;
+                case 2:
+                    valueStr = "II";
+                    break;
+                case 3:
+                    valueStr = "III";
+                    break;
+                default:
+                    valueStr = " ";
+                    break;
+            }
+            chart[itemId-1][userId*5-1] = valueStr;
+            if (valueStr.includes("I")) chart[itemId-1][userId*5-2] = "class='tally-mark'";
+            chart[itemId-1][userId*5-3] = itemUserId;
+        }
+
+        for (item = 0; item < numItems; item++) {
+            itemName = itemsListObj[item].Name;
+            data += ("<tr><td>" + itemName + "</td>");
+
+            for (user = 0; user < numUsers*5; user+=5) {
+                data += ("<td onclick='openGroceryCounter(this)' " + chart[item][user+3] + ">" + chart[item][user+4] + "</td>" +
+                        "<td id='itemUserId' style='display:none' tabIndex='" + chart[item][user+2] + "'></td>" +
+                        "<td id='userId' style='display:none' tabIndex='" + chart[item][user+1] + "'></td>" +
+                        "<td id='itemId' style='display:none' tabIndex='" + chart[item][user] + "'></td>" );
+            }
+            data += "</tr>";
+        }
+        data = data + "</table></div>";
+        $(".grocery-chart-modal-container").html(data);
+
+    }).catch(function (itemUserError){
+        console.log("itemUser Error");
+    });
 }
 
 function hideGroceryChart() {
@@ -90,7 +162,10 @@ function openGroceryCounter(operator) {
 function addGroceryCounter() {
     //need to make smarter
     switch (box.innerHTML) {
-        case "x":
+        case " ":
+            box.innerHTML = "X";
+            break;
+        case "X":
             box.innerHTML = "I"
             box.classList.add("tally-mark");
             break;
@@ -102,7 +177,7 @@ function addGroceryCounter() {
             break;
         default:
             box.classList.remove("tally-mark");
-            box.innerHTML = "x"
+            box.innerHTML = " "
             break;
     };
     updateDatabase();
@@ -117,7 +192,7 @@ function subGroceryCounter() {
             box.innerHTML = "I"
             break;
         case "I":
-            box.innerHTML = "x"
+            box.innerHTML = "X"
             box.classList.remove("tally-mark");
             break;
         default:
@@ -128,7 +203,52 @@ function subGroceryCounter() {
 }
 
 function updateDatabase() {
-    alert(box.cellIndex);
+    console.log("Starting Database Update");
+
+    var value;
+    switch (box.innerHTML) {
+        case "X":
+            value = -1;
+            break;
+        case "I":
+            value = 1;
+            break;
+        case "II":
+            value = 2;
+            break;
+        case "III":
+            value = 3;
+            break;
+        default:
+            value = -1;
+            break;
+    }
+
+    itemUser = box.nextSibling;
+    user = itemUser.nextSibling;
+    item = user.nextSibling;
+
+    var itemUserId = itemUser.tabIndex;
+    if (itemUserId == "-1") itemUserId = "";
+
+    console.log(itemUser.id + ":" + itemUserId + ":" + user.id + ":" + user.tabIndex + ":" + item.id + ":" + item.tabIndex + ":");
+    var updatePromise = tableLookup("updateValue",[itemUserId,user.tabIndex,item.tabIndex,value]);
+
+    updatePromise.then( function(obj) {
+        console.log(obj.result);
+        if (obj.result.queryType == "Insert") {
+            itemUser.tabIndex = obj.result.newId;
+            user.tabIndex = obj.result.user;
+            item.tabIndex = obj.result.item;
+        } else if (obj.result.queryType == "Delete") {
+            itemUser.tabIndex = "";
+            user.tabIndex = obj.result.user;
+            item.tabIndex = obj.result.item;
+        }
+    }).catch( function(obj){
+        console.log(obj);
+    });
+    console.log("Finishing Database Update");
 }
 
 $(document).ready(function(){
