@@ -220,7 +220,7 @@ function updateDatabase() {
             value = 3;
             break;
         default:
-            value = -1;
+            value = 0;
             break;
     }
 

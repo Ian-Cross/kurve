@@ -37,6 +37,7 @@
     position: absolute;
     left: calc(50vw - 250px);
     bottom: 0;
+    text-align: center;
 }
 
 .appBall {

@@ -9,10 +9,12 @@
         <link rel="stylesheet" href="css/clock.css">
         <link rel="stylesheet" href="css/weather.css">
         <link rel="stylesheet" href="css/grocery-chart.css">
+        <link rel="stylesheet" href="css/spotify.css">
 
         <script src="js/jquery.min.js"></script>
         <script src="js/functions.js"></script>
         <script src="js/grocery-chart.js"></script>
+        <script src="js/spotify.js"></script>
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" crossorigin="anonymous">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" crossorigin="anonymous">
@@ -37,21 +39,22 @@
                 <div class="clear-space"></div>
                 <div class="app-container">
                     <div class="appBall grocery-chart-app"><div class="grocery-chart-icon"></div></div>
-                    <div class="appBall"><div class="memo"></div></div>
-                    <div class="appBall"><div class="bus"></div></div>
-                    <div class="appBall"><div class="music"></div></div>
-                    <div class="appBall"><div class=""></div></div>
-                    <div class="clear-space"></div>
-                    <div class="appBall bg-white"><div class="facebook"></div></div>
-                    <div class="appBall bg-white"><div class="twitter"></div></div>
-                    <div class="appBall bg-white"><div class="gmail"></div></div>
-                    <div class="appBall"><div class="spotify"></div></div>
-                    <div class="appBall"><div class=""></div></div>
+                    <!--<div class="appBall"><div class="memo"></div></div>-->
+                    <!--<div class="appBall"><div class="bus"></div></div>-->
+                    <!--<div class="appBall"><div class="music"></div></div>-->
+                    <!--<div class="appBall"><div class=""></div></div>-->
+                    <!--<div class="clear-space"></div>-->
+                    <!--<div class="appBall bg-white"><div class="facebook"></div></div>-->
+                    <!--<div class="appBall bg-white"><div class="twitter"></div></div>-->
+                    <!--<div class="appBall bg-white"><div class="gmail"></div></div>-->
+                    <div class="appBall spotify-app"><div class="spotify"></div></div>
+                    <!--<div class="appBall"><div class=""></div></div>-->
                 </div>
             </div>
         </div>
         <div class="modal-background fullscreen hidden"></div>
         <div class="grocery-chart-modal-container hidden"></div>
+        <div class="spotify-modal-container hidden"></div>
         <div class="clear-space"></div>
     </body>
 </html>

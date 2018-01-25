@@ -1,0 +1,15 @@
+.spotify-modal-container {
+    background: #708090;
+    min-height: 300px;
+    width: 60%;
+    display: block;
+    position: absolute;
+    top: 100px;
+    left: 20%;
+    z-index: 50;
+}
+
+.spotify-modal-container iframe {
+    width: 100%;
+    height: 100%;
+}

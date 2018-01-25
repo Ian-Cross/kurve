@@ -2,6 +2,7 @@ function startScreen() {
     startTime();
     startWeather();
     loadItems();
+    loadSpotify();
 }
 
 function startTime() {
@@ -108,6 +109,7 @@ function startWeather() {
 
 function hideAllApps() {
     hideGroceryChart();
+    hideSpotify();
     updateVisibleModalBackground();
 };
 

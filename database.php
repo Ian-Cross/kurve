@@ -31,7 +31,7 @@ function updateValue($con,$id,$user,$item,$value) {
     if ($id == " " || $id == "") {
         $update = $con->query("INSERT INTO ItemsUsers (user,item,value) VALUES ($user,$item,$value)");
         $queryType = "Insert";
-    } else if ($value == " " || $value == "") {
+    } else if ($value == 0) {
         $update = $con->query("DELETE FROM ItemsUsers WHERE id=$id");
         $queryType = "Delete";
     } else {
