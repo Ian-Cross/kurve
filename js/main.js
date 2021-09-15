@@ -284,7 +284,7 @@ var MM = (function() {
 				}
 			});
 
-			wrapper.style.display = showWrapper ? "block" : "none";
+			wrapper.style.display = showWrapper ? "block" : "block";
 		});
 	};
 

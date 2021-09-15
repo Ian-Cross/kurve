@@ -9,19 +9,108 @@
  * Changes to this files will be ignored by GIT. *
  *****************************************************/
 
- body {
 
- }
 
- .background {
-   position: absolute;
-   height: 100%;
-   width: 100%;
-   padding: 60px !important;
-   color: black;
-   background: #bae0ff;
-   background: -moz-linear-gradient(left, #bae0ff 0%, #618c91 100%);
-   background: -webkit-linear-gradient(left, #bae0ff 0%,#618c91 100%);
-   background: linear-gradient(to right, #bae0ff 0%,#618c91 100%);
-   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bae0ff', endColorstr='#618c91',GradientType=1 );
- }
+body,html,div {
+     font-family: 'Josefin Sans', sans-serif;
+     margin: 0;
+     color: #fff;
+}
+
+.background {
+    position: absolute;
+    height: calc(100% - 120px);
+    width: calc(100% - 120px);
+    padding: 60px !important;
+    color: black;
+    background: #bdbdbd;
+    background: -moz-linear-gradient(45deg, #bdbdbd 0%, #7b7b7b 100%);
+    background: -webkit-linear-gradient(45deg, #bdbdbd 0%,#7b7b7b 100%);
+    background: linear-gradient(45deg, #bdbdbd 0%,#7b7b7b 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bdbdbd', endColorstr='#7b7b7b',GradientType=1 );
+}
+
+#inline-block {
+    display: inline-block;
+}
+
+.region {
+    position: relative;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.region.top.center {
+    display: inline-block;
+    width: 50%;
+    top: -10px;
+    left: calc(50% - 225px);
+}
+
+.bottom.center {
+    width: 100%;
+    left: calc(50% - 60px) !important;
+}
+
+.fullscreen > .line {
+    width: 3px;
+    height: 1000px;
+    margin: 0 auto;
+    border: 1px solid red;
+}
+
+.middle {
+    top: 275px;
+}
+
+.time {
+    text-align: right;
+    color: #fff;
+    font-size: 72px;
+}
+
+.center {
+    margin: 0 auto;
+}
+
+.app-section {
+    position: relative;
+}
+
+#module_3_currentweather {
+    font-size: 72px;
+}
+
+.date {
+    color: #fff;
+    text-align: right;
+}
+
+/* Music */
+
+#module_3_MMM-Scrobbler .album-art img {
+    height: 100px;
+    width: 100px;
+}
+
+#module_3_MMM-Scrobbler .player {
+    width: 500px;
+}
+
+#module_3_MMM-Scrobbler .album-art-container {
+    width: 100px;
+    display: inline-block;
+    padding-right: 40px;
+}
+
+#module_3_MMM-Scrobbler .meta {
+    display: inline-block;
+}
+
+/* End Music */

@@ -14,15 +14,15 @@ Module.register("currentweather",{
 		location: false,
 		locationID: false,
 		appid: "",
-		units: config.units,
+		units: 'metric',
 		updateInterval: 10 * 60 * 1000, // every 10 minutes
 		animationSpeed: 1000,
-		timeFormat: config.timeFormat,
-		showPeriod: true,
+		timeFormat: 12,
+		showPeriod: false,
 		showPeriodUpper: false,
-		showWindDirection: true,
+		showWindDirection: false,
 		showWindDirectionAsArrow: false,
-		useBeaufort: true,
+		useBeaufort: false,
 		lang: config.language,
 		showHumidity: false,
 		degreeLabel: false,
@@ -35,10 +35,10 @@ Module.register("currentweather",{
 		apiBase: "http://api.openweathermap.org/data/",
 		weatherEndpoint: "weather",
 
-		appendLocationNameToHeader: true,
+		appendLocationNameToHeader: false,
 		calendarClass: "calendar",
 
-		onlyTemp: false,
+		onlyTemp: true,
 		roundTemp: false,
 
 		iconTable: {

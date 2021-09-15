@@ -11,8 +11,8 @@ Module.register("clock",{
 		displayType: "digital", // options: digital, analog, both
 
 		timeFormat: config.timeFormat,
-		displaySeconds: true,
-		showPeriod: true,
+		displaySeconds: false,
+		showPeriod: false,
 		showPeriodUpper: false,
 		clockBold: false,
 		showDate: true,
@@ -58,15 +58,15 @@ Module.register("clock",{
 		 * Create wrappers for DIGITAL clock
 		 */
 
-		var dateWrapper = document.createElement("div");
 		var timeWrapper = document.createElement("div");
 		var secondsWrapper = document.createElement("sup");
 		var periodWrapper = document.createElement("span");
+		var dateWrapper = document.createElement("div");
 		var weekWrapper = document.createElement("div")
 		// Style Wrappers
-		dateWrapper.className = "date normal medium";
 		timeWrapper.className = "time bright large light";
 		secondsWrapper.className = "dimmed";
+		dateWrapper.className = "date normal medium";
 		weekWrapper.className = "week dimmed medium"
 
 		// Set content of wrappers.
@@ -175,8 +175,8 @@ Module.register("clock",{
 
 		if (this.config.displayType === "digital") {
 			// Display only a digital clock
-			wrapper.appendChild(dateWrapper);
 			wrapper.appendChild(timeWrapper);
+			wrapper.appendChild(dateWrapper);
 			wrapper.appendChild(weekWrapper);
 		} else if (this.config.displayType === "analog") {
 			// Display only an analog clock

@@ -53,7 +53,7 @@ var Server = function(config, callback) {
 	});
 
 	app.get("/", function(req, res) {
-		var html = fs.readFileSync(path.resolve(global.root_path + "/index.html"), {encoding: "utf8"});
+		var html = fs.readFileSync(path.resolve(global.root_path + "/index.php"), {encoding: "utf8"});
 		html = html.replace("#VERSION#", global.version);
 
 		configFile = "config/config.js";

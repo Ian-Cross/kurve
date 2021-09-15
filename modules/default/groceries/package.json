@@ -1,0 +1,11 @@
+{
+  "name": "groceries",
+  "version": "1.0.0",
+  "description": "This will be a chart that can have people added to it and items added to it to track whos turn it is to buy that item.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ian Cross",
+  "license": "MIT"
+}
